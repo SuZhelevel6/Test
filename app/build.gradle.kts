@@ -1,43 +1,62 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 android {
-    namespace = "com.sum.tea"
-    compileSdk = 34
+    namespace = AndroidConfig.namespace
+    compileSdk = AndroidConfig.compileSdk
 
     defaultConfig {
-        applicationId = "com.sum.tea"
-        minSdk = 30
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        applicationId = AndroidConfig.namespace
+        minSdk = AndroidConfig.minSdk
+        targetSdk = AndroidConfig.targetSdk
+        versionCode = AndroidConfig.versionCode
+        versionName = AndroidConfig.versionName
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = AndroidConfig.testInstrumentationRunner
         vectorDrawables {
             useSupportLibrary = true
         }
     }
+
+    signingConfigs {
+        getByName("debug") {
+            storeFile = file(SigningConfigs.debugStoreFile)
+            storePassword = SigningConfigs.debugStorePassword
+            keyAlias = SigningConfigs.debugKeyAlias
+            keyPassword = SigningConfigs.debugKeyPassword
+        }
+        create("release") {
+            storeFile = file(SigningConfigs.releaseStoreFile)
+            storePassword = SigningConfigs.releaseStorePassword
+            keyAlias = SigningConfigs.releaseKeyAlias
+            keyPassword = SigningConfigs.releaseKeyPassword
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            signingConfig = signingConfigs.getByName("release")
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = AndroidConfig.jvmTarget
     }
+
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
-    }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -46,20 +65,19 @@ android {
 }
 
 dependencies {
-
-    implementation("androidx.core:core-ktx:1.13.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
-    implementation("androidx.activity:activity-compose:1.9.3")
-    implementation(platform("androidx.compose:compose-bom:2023.08.00"))
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.2.1")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.08.00"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    implementation(DependenciesLibraries.coreKtx)
+    implementation(DependenciesLibraries.lifecycleRuntimeKtx)
+    implementation(DependenciesLibraries.activityCompose)
+    implementation(platform(DependenciesLibraries.composeBom))
+    implementation(DependenciesLibraries.composeUi)
+    implementation(DependenciesLibraries.composeUiGraphics)
+    implementation(DependenciesLibraries.composeUiToolingPreview)
+    implementation(DependenciesLibraries.composeMaterial3)
+    testImplementation(DependenciesLibraries.junit)
+    androidTestImplementation(DependenciesLibraries.extJunit)
+    androidTestImplementation(DependenciesLibraries.espressoCore)
+    androidTestImplementation(platform(DependenciesLibraries.composeBom))
+    androidTestImplementation(DependenciesLibraries.composeUiTestJunit4)
+    debugImplementation(DependenciesLibraries.composeUiTooling)
+    debugImplementation(DependenciesLibraries.composeUiTestManifest)
 }
