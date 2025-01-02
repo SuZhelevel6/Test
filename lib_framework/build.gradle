@@ -1,0 +1,51 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.sum.framework'  // AGP 7.0 和更高版本要求在 build.gradle 文件中明确指定 namespace
+
+    compileSdk AndroidConfig.compileSdk
+
+    defaultConfig {
+        minSdk = AndroidConfig.minSdk
+        targetSdk = AndroidConfig.targetSdk
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
+}
+
+dependencies {
+    compileOnly fileTree(dir: 'libs', include: ['*.jar'])
+    compileOnly DependenciesLibraries.coreKtx
+    compileOnly DependenciesLibraries.appcompat
+    compileOnly DependenciesLibraries.tbssdk
+    compileOnly DependenciesLibraries.timber
+    compileOnly DependenciesLibraries.gson
+    compileOnly DependenciesLibraries.refreshLayout
+    compileOnly DependenciesLibraries.viewpager2
+    testImplementation DependenciesLibraries.junit
+    testImplementation DependenciesLibraries.extJunit
+    testImplementation DependenciesLibraries.espressoCore
+
+}
