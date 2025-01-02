@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.compose")
+    id("kotlin-kapt") // 应用 kotlin-kapt 插件, Kotlin 注解处理工具
 }
 
 android {
@@ -65,19 +66,75 @@ android {
 }
 
 dependencies {
+    // Android 核心库
     implementation(DependenciesLibraries.coreKtx)
     implementation(DependenciesLibraries.lifecycleRuntimeKtx)
+    implementation(DependenciesLibraries.appcompat)
+    implementation(DependenciesLibraries.multidex)
+
+    // Compose 相关
     implementation(DependenciesLibraries.activityCompose)
     implementation(platform(DependenciesLibraries.composeBom))
     implementation(DependenciesLibraries.composeUi)
     implementation(DependenciesLibraries.composeUiGraphics)
     implementation(DependenciesLibraries.composeUiToolingPreview)
     implementation(DependenciesLibraries.composeMaterial3)
-    testImplementation(DependenciesLibraries.junit)
-    androidTestImplementation(DependenciesLibraries.extJunit)
-    androidTestImplementation(DependenciesLibraries.espressoCore)
     androidTestImplementation(platform(DependenciesLibraries.composeBom))
     androidTestImplementation(DependenciesLibraries.composeUiTestJunit4)
     debugImplementation(DependenciesLibraries.composeUiTooling)
     debugImplementation(DependenciesLibraries.composeUiTestManifest)
+
+    // UI 组件
+    implementation(DependenciesLibraries.viewpager2)
+    implementation(DependenciesLibraries.flexbox)
+
+    // 日志
+    implementation(DependenciesLibraries.timber)
+
+    // 测试
+    testImplementation(DependenciesLibraries.junit)
+    androidTestImplementation(DependenciesLibraries.extJunit)
+    androidTestImplementation(DependenciesLibraries.espressoCore)
+
+    // 网络请求
+    implementation(DependenciesLibraries.retrofit)
+    implementation(DependenciesLibraries.retrofitGson)
+    implementation(DependenciesLibraries.loggingInterceptor)
+
+    // JSON 解析
+    implementation(DependenciesLibraries.gson)
+
+    // 数据存储
+    implementation(DependenciesLibraries.mmkv)
+    implementation(DependenciesLibraries.roomKtx)
+    kapt(DependenciesLibraries.roomCompiler)
+
+    // 下拉刷新
+    implementation(DependenciesLibraries.refreshLayout)
+    implementation(DependenciesLibraries.refreshHeader)
+    implementation(DependenciesLibraries.refreshFooter)
+
+    // 图片加载
+    implementation(DependenciesLibraries.glide)
+    kapt(DependenciesLibraries.glideCompiler)
+
+    // 路由
+    implementation(DependenciesLibraries.arouterApi)
+    kapt(DependenciesLibraries.arouterCompiler)
+
+    // 腾讯 X5
+    implementation(DependenciesLibraries.tbssdk)
+
+    // 媒体播放
+    implementation(DependenciesLibraries.exoPlayer)
+
+    // CameraX
+    implementation(DependenciesLibraries.cameraX)
+
+    // 权限
+    implementation(DependenciesLibraries.rxPermission)
+    implementation(DependenciesLibraries.rxjava)
+    implementation(DependenciesLibraries.rxandroid)
+
+    implementation(project(":lib_framework"))
 }
