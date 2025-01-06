@@ -19,3 +19,6 @@ dependencyResolutionManagement {
 rootProject.name = "tea"
 include(":app")
 include(":lib_framework")
+include(":lib_common")
+include(":mod_main")
+

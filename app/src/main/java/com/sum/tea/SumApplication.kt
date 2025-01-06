@@ -10,7 +10,6 @@ import com.sum.framework.manager.ActivityManager
 import com.sum.framework.manager.AppFrontBack
 import com.sum.framework.manager.AppFrontBackListener
 import com.sum.framework.toast.TipsToast
-import com.sum.tea.task.*
 
 
 class SumApplication  : Application() {

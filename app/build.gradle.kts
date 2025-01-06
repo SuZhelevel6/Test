@@ -37,6 +37,13 @@ android {
         }
     }
 
+    //ARouter
+    kapt {
+        arguments {
+            arg("AROUTER_MODULE_NAME", project.name)
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -138,4 +145,5 @@ dependencies {
     implementation(DependenciesLibraries.rxandroid)
 
     implementation(project(":lib_framework"))
+    implementation(project(":mod_main"))
 }
