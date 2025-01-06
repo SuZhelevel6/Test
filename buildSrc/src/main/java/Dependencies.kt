@@ -53,6 +53,7 @@ object DependenciesVersions {
     const val rxjava = "3.1.6"
     const val rxandroid = "3.0.2"
     const val camerax = "1.3.0-alpha04"
+    const val material = "1.4.0"
 }
 
 // 定义依赖库
@@ -62,6 +63,7 @@ object DependenciesLibraries {
     const val lifecycleRuntimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:${DependenciesVersions.lifecycleRuntimeKtx}"
     const val appcompat = "androidx.appcompat:appcompat:${DependenciesVersions.appcompat}"
     const val multidex = "androidx.multidex:multidex:${DependenciesVersions.multidex}"
+    const val material = "com.google.android.material:material:${DependenciesVersions.material}"
 
     // Compose 相关
     const val activityCompose = "androidx.activity:activity-compose:${DependenciesVersions.activityCompose}"

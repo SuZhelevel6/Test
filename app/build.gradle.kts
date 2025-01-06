@@ -71,6 +71,7 @@ dependencies {
     implementation(DependenciesLibraries.lifecycleRuntimeKtx)
     implementation(DependenciesLibraries.appcompat)
     implementation(DependenciesLibraries.multidex)
+    implementation(DependenciesLibraries.material)
 
     // Compose 相关
     implementation(DependenciesLibraries.activityCompose)
