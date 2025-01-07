@@ -145,5 +145,6 @@ dependencies {
     implementation(DependenciesLibraries.rxandroid)
 
     implementation(project(":lib_framework"))
+    implementation(project(":lib_stater"))
     implementation(project(":mod_main"))
 }
